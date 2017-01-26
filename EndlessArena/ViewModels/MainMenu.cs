@@ -17,13 +17,8 @@ namespace EndlessArena.ViewModels
 
         public MainMenu()
         {
-            Exit = new RelayCommand(o => ExitApp(), o => true);
-
-        }
-
-        void ExitApp()
-        {
-            Messenger.Publish<CloseWindowMessage>();
+            Exit = new RelayCommand(o => Messenger.Publish(new CloseWindowMessage()), o => true);
+            StartGame = new RelayCommand(o => Messenger.Publish(new StartGameMessage()), o => true);
         }
     }
 }

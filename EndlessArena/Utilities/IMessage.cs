@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EndlessArena.Utilities.Messages
+namespace EndlessArena.Utilities
 {
-    class CloseWindowMessage : IMessage
+    interface IMessage
     {
     }
 }

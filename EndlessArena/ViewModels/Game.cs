@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EndlessArena.Utilities.Messages
+namespace EndlessArena.ViewModels
 {
-    class CloseWindowMessage : IMessage
+    class Game : IViewModel
     {
     }
 }

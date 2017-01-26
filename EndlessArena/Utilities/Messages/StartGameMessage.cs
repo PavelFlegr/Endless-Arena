@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EndlessArena.Utilities.Messages
 {
-    class CloseWindowMessage : IMessage
+    class StartGameMessage : IMessage
     {
     }
 }

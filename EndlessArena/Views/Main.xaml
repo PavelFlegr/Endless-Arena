@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         WindowState="Maximized"
         WindowStyle="None"
+        KeyDown="Window_KeyDown"
         Title="MainWindow">
     <Window.DataContext>
         <ViewModels:Main/>
@@ -16,6 +17,9 @@
         <DataTemplate DataType="{x:Type ViewModels:MainMenu}">
             <Views:MainMenu/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:Game}">
+            <Views:Game/>
+        </DataTemplate>
     </Window.Resources>
-    <ContentPresenter Content="{Binding Current}"/>
+    <ContentControl Content="{Binding Current}"/>
 </Window>

@@ -12,25 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using EndlessArena.Utilities;
-using EndlessArena.Utilities.Messages;
 
 namespace EndlessArena.Views
 {
     /// <summary>
-    /// Interakční logika pro MainWindow.xaml
+    /// Interakční logika pro Game.xaml
     /// </summary>
-    public partial class Main : Window
+    public partial class Game : UserControl
     {
-        public Main()
+        public Game()
         {
             InitializeComponent();
-            Messenger.Subscribe<CloseWindowMessage>(a => Close());
-        }
-
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            Messenger.Publish(new KeyDownMessage(e.Key));
         }
     }
 }
