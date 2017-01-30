@@ -54,14 +54,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\PositionConverter.cs" />
+    <Compile Include="Input\Mouse.cs" />
+    <Compile Include="Input\MouseDownEventArgs.cs" />
+    <Compile Include="Input\MouseDownEventHandler.cs" />
+    <Compile Include="Models\GameObject.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\Scene.cs" />
+    <Compile Include="Models\Transform.cs" />
+    <Compile Include="Utilities\Vec2.cs" />
     <Compile Include="Utilities\IMessage.cs" />
     <Compile Include="Utilities\Messages\CloseWindowMessage.cs" />
     <Compile Include="Utilities\Messages\KeyDownMessage.cs" />
+    <Compile Include="Utilities\Messages\MainMenuMessage.cs" />
     <Compile Include="Utilities\Messages\StartGameMessage.cs" />
     <Compile Include="Utilities\Messenger.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="ViewModels\Game.cs" />
     <Compile Include="ViewModels\MainMenu.cs" />
+    <Compile Include="Views\CartesianCanvas.cs" />
     <Compile Include="Views\Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
@@ -121,8 +132,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

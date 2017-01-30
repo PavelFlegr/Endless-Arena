@@ -12,19 +12,18 @@ namespace EndlessArena.Utilities
     //Umožňuje objektům registrovat akce pro určité zprávy či zprávy posílat
     class Messenger
     {
-        static ConcurrentDictionary<Type, Action<IMessage>> subscribers = new ConcurrentDictionary<Type, Action<IMessage>>();
-        public static void Publish<T>(T message) where T : IMessage
+        static ConcurrentDictionary<Type, object> subscribers = new ConcurrentDictionary<Type, object>();
+        public static void Publish<T>(T message)
         {
-            Action<IMessage> TAction;
-            if(subscribers.TryGetValue(typeof(T), out TAction)) {
-                TAction?.Invoke(message);
+            if (subscribers.TryGetValue(typeof(T), out object TAction)) {
+                (TAction as Action<T>)?.Invoke(message);
             }
         }
 
-        public static void Subscribe<T>(Action<T> a) where T : IMessage
+        public static void Subscribe<T>(Action<T> a)
         {
-            Action<IMessage> TAction = subscribers.GetOrAdd(typeof(T), a as Action<IMessage>);
-            TAction += a as Action<IMessage>;
+            Action<T> TAction = subscribers.GetOrAdd(typeof(T), a) as Action<T>;
+            TAction += a;
         }
     }
 }

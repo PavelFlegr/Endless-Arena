@@ -7,10 +7,15 @@
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         </Style.Setters>
     </Style>
-    <Style TargetType="ItemsControl" x:Key="Menu">
+    <Style TargetType="Rectangle" x:Key="test">
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"></Setter>
+    </Style>
+    <Style TargetType="StackPanel" x:Key="Menu">
         <Style.Resources>
             <Style TargetType="TextBlock">
                 <Style.Setters>
+                    <Setter Property="Width" Value="700"/>
+                    <Setter Property="TextAlignment" Value="Center"/>
                     <Setter Property="Background">
                         <Setter.Value>
                             <SolidColorBrush Color="Black" Opacity="0"></SolidColorBrush>

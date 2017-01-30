@@ -8,22 +8,20 @@
     <UserControl.Resources>
         <ResourceDictionary Source="/Resources/MainMenu.xaml"/>
     </UserControl.Resources>
-    <StackPanel>
-        <TextBlock Height="100"></TextBlock>
+    <StackPanel VerticalAlignment="Center">
         <TextBlock>Welcome to</TextBlock>
         <TextBlock>Endless Arena</TextBlock>
-        <TextBlock Height="200"></TextBlock>
-        <ItemsControl Style="{StaticResource Menu}" Width="700">
+        <StackPanel Margin="0,200,0,0" Style="{StaticResource Menu}">
             <TextBlock Text="Start Game" TextAlignment="Center">
-                <TextBlock.InputBindings>
-                    <MouseBinding MouseAction="LeftClick" Command="{Binding StartGame}"/>
-                </TextBlock.InputBindings>
+                    <TextBlock.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding StartGame}"/>
+                    </TextBlock.InputBindings>
             </TextBlock>
             <TextBlock Text="Exit" TextAlignment="Center">
                 <TextBlock.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding Exit}"/>
                 </TextBlock.InputBindings>
             </TextBlock>
-        </ItemsControl>
+        </StackPanel>
     </StackPanel>
 </UserControl>

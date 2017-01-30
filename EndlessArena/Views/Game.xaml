@@ -4,9 +4,53 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EndlessArena.Views"
+             xmlns:Converters="clr-namespace:EndlessArena.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Canvas>
-        <Rectangle Fill="Blue" Height="50" Width="50"/>
-    </Canvas>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/MainMenu.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <local:CartesianCanvas>
+        <ItemsControl ItemsSource="{Binding Objects}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <local:CartesianCanvas/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemContainerStyle>
+            <Style>
+                <Setter Property="local:CartesianCanvas.X" Value="{Binding Transform.Position.X}"></Setter>
+                <Setter Property="local:CartesianCanvas.Y" Value="{Binding Transform.Position.Y}"></Setter>
+            </Style>
+        </ItemsControl.ItemContainerStyle>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Width="50" Height="50" Fill="Blue" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="{Binding Transform.Angle}"></RotateTransform>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <DockPanel Visibility="{Binding ShowMenu, Converter={StaticResource BoolToVis}}">
+            <StackPanel VerticalAlignment="Center" Style="{StaticResource Menu}">
+                <TextBlock Text="Continue">
+                    <TextBlock.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding ToggleMenuCommand}"/>
+                    </TextBlock.InputBindings>
+                </TextBlock>
+                <TextBlock Text="Back To Menu">
+                    <TextBlock.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding MainMenuCommand}"/>
+                    </TextBlock.InputBindings>
+                </TextBlock>
+            </StackPanel>
+        </DockPanel>
+    </local:CartesianCanvas>
 </UserControl>

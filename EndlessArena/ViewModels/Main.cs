@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using EndlessArena.Utilities;
+using System.Windows.Input;
+using EndlessArena.Utilities.Messages;
+using System.Windows.Media;
 
 namespace EndlessArena.ViewModels
 {
@@ -24,12 +27,30 @@ namespace EndlessArena.ViewModels
         public Main()
         {
             Current = new MainMenu();
-            Messenger.Subscribe<Utilities.Messages.StartGameMessage>(a => Current = new Game());
+            Messenger.Subscribe<StartGameMessage>(a => Current = new Game());
+            Messenger.Subscribe<KeyDownMessage>(a => OnKeyDown(a.Key));
+            Messenger.Subscribe<MainMenuMessage>(a => Current = new MainMenu());
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
+        }
+
+        private void CompositionTarget_Rendering(object sender, EventArgs e)
+        {
+            Update();
         }
 
         void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void OnKeyDown(Key key)
+        {
+            Current.OnKeyDown(key);
+        }
+
+        public void Update()
+        {
+            Current.Update();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

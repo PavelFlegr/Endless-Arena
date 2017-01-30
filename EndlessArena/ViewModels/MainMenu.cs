@@ -20,5 +20,15 @@ namespace EndlessArena.ViewModels
             Exit = new RelayCommand(o => Messenger.Publish(new CloseWindowMessage()), o => true);
             StartGame = new RelayCommand(o => Messenger.Publish(new StartGameMessage()), o => true);
         }
+
+        public void OnKeyDown(Key key)
+        {
+            
+        }
+
+        public void Update()
+        {
+            
+        }
     }
 }
