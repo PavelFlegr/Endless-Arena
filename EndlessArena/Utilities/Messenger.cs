@@ -15,7 +15,8 @@ namespace EndlessArena.Utilities
         static ConcurrentDictionary<Type, object> subscribers = new ConcurrentDictionary<Type, object>();
         public static void Publish<T>(T message)
         {
-            if (subscribers.TryGetValue(typeof(T), out object TAction)) {
+            object TAction;
+            if (subscribers.TryGetValue(typeof(T), out TAction)) {
                 (TAction as Action<T>)?.Invoke(message);
             }
         }

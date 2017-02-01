@@ -45,18 +45,20 @@ namespace EndlessArena.Models
                 }
             }
 
-            void Shoot()
-            {
-                GameObject proj = new GameObject();
-                proj.Transform.Position = Transform.Position;
-                Scene.Add(proj);
-                canShoot = false;
-                Task.Delay(1000).ContinueWith(x => canShoot = true);
-            }
+            
 
             Transform.Position += velocity;
             Transform.Angle = (Math.Atan2(Input.Mouse.Position.Y - Transform.Position.Y, Input.Mouse.Position.X - Transform.Position.X))/Math.PI * 180;
 
+        }
+
+        void Shoot()
+        {
+            GameObject proj = new GameObject();
+            proj.Transform.Position = Transform.Position;
+            Scene.Add(proj);
+            canShoot = false;
+            Task.Delay(1000).ContinueWith(x => canShoot = true);
         }
     }
 }

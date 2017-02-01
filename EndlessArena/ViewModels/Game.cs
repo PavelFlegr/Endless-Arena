@@ -58,10 +58,10 @@ namespace EndlessArena.ViewModels
 
         public void Update()
         {
-            Parallel.ForEach(Objects, o =>
+            foreach (GameObject o in Objects)
             {
                 o.Update();
-            });
+            }
 
             OnPropertyChanged("Objects");
         }

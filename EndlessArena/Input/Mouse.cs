@@ -11,6 +11,7 @@ namespace EndlessArena.Input
 {
     class Mouse
     {
+        static Window window = Application.Current.MainWindow;
         static Mouse()
         {
             // System.Windows.Input.Mouse.AddMouseDownHandler(Application.Current.MainWindow)
@@ -20,9 +21,9 @@ namespace EndlessArena.Input
         {
             get
             {
-                Window window = Application.Current.MainWindow;
+
                 Point topLeft = System.Windows.Input.Mouse.GetPosition(window);
-                return new Vec2(topLeft.X - SystemParameters.VirtualScreenWidth/2, topLeft.Y - SystemParameters.VirtualScreenHeight/2);
+                return new Vec2(topLeft.X - SystemParameters.PrimaryScreenWidth/2, topLeft.Y - SystemParameters.PrimaryScreenHeight/2);
             }
         }
     }

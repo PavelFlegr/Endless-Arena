@@ -50,10 +50,12 @@ namespace EndlessArena.Views
 
         private static void OnPositioningChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is UIElement uie)
+            if (d is UIElement)
             {
-                if (VisualTreeHelper.GetParent(uie) is CartesianCanvas p)
+                var uie = (UIElement)d;
+                if (VisualTreeHelper.GetParent(uie) is CartesianCanvas)
                 {
+                    var p = (CartesianCanvas)VisualTreeHelper.GetParent(uie);
                     p.InvalidateArrange();
                 }
             }
