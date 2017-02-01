@@ -11,5 +11,7 @@ namespace EndlessArena.Models
     {
         public Vec2 Position { get; set; }
         public double Angle { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
     }
 }

@@ -17,9 +17,20 @@ namespace EndlessArena.ViewModels
         {
             get
             {
+                List<GameObject> os = new List<GameObject>();
+                foreach (var o in Scene.Current.Objects)
+                {
+                    os.Add(o);
+                }
                 return new List<GameObject>(Scene.Current.Objects);
             }
         }
+
+        List<GameObject> GetChildren(GameObject.)
+        {
+            
+        }
+
         public ICommand ToggleMenuCommand { get; set; }
         public ICommand MainMenuCommand { get; set; }
         bool _showMenu;

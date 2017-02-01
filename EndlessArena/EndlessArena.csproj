@@ -58,6 +58,8 @@
     <Compile Include="Input\Mouse.cs" />
     <Compile Include="Input\MouseDownEventArgs.cs" />
     <Compile Include="Input\MouseDownEventHandler.cs" />
+    <Compile Include="Models\Bullet.cs" />
+    <Compile Include="Models\Cannon.cs" />
     <Compile Include="Models\GameObject.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Scene.cs" />
