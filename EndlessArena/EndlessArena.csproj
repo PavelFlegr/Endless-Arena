@@ -54,7 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converters\PositionConverter.cs" />
+    <Compile Include="Models\Converters\PositionConverter.cs" />
     <Compile Include="Input\Mouse.cs" />
     <Compile Include="Input\MouseDownEventArgs.cs" />
     <Compile Include="Input\MouseDownEventHandler.cs" />

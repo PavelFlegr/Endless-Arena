@@ -12,11 +12,13 @@ namespace EndlessArena.Models
     class Player : GameObject
     {
         bool canShoot = true;
+        Cannon weapon = new Cannon();
 
         public Player()
         {
             Transform.Width = 50;
             Transform.Height = 50;
+            Children.Add(weapon);
         }
 
         public override void Update()
@@ -63,7 +65,7 @@ namespace EndlessArena.Models
         void Shoot()
         {
 
-            GameObject proj = new Bullet(new Vec2(Math.Cos(Transform.Angle / 180 * Math.PI) * 10, Math.Sin(Transform.Angle / 180 * Math.PI) * 10));
+            GameObject proj = new Bullet(new Vec2(Math.Cos(Transform.Angle / 180 * Math.PI) * 50, Math.Sin(Transform.Angle / 180 * Math.PI) * 50));
             proj.Transform.Position = new Vec2(Transform.Position.X + Math.Cos(Transform.Angle / 180 * Math.PI) * Transform.Width, Transform.Position.Y + Math.Sin(Transform.Angle / 180 * Math.PI) * Transform.Height);
             Scene.Add(proj);
             canShoot = false;

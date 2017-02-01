@@ -13,8 +13,8 @@ namespace EndlessArena.Models
         IEnumerator Movement;
         public Bullet(Vec2 velocity)
         {
-            Transform.Width = 5;
-            Transform.Height = 5;
+            Transform.Width = 10;
+            Transform.Height = 10;
             Movement = Move(velocity).GetEnumerator();
         }
 

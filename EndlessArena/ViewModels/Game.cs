@@ -21,14 +21,20 @@ namespace EndlessArena.ViewModels
                 foreach (var o in Scene.Current.Objects)
                 {
                     os.Add(o);
+                    GetChildren(os, o);
                 }
-                return new List<GameObject>(Scene.Current.Objects);
+                return os;
             }
         }
 
-        List<GameObject> GetChildren(GameObject.)
+        void GetChildren(List<GameObject> os, GameObject parent)
         {
-            
+            foreach(var o in parent.Children)
+            {
+                var no = new GameObject { Transform = new Transform { Angle = parent.Transform.Angle + o.Transform.Angle, Height = parent.Transform.Height + o.Transform.Height, Position = parent.Transform.Position + o.Transform.Position, Width = parent.Transform.Width + o.Transform.Width } };
+                os.Add(no);
+                GetChildren(os, no);
+            }
         }
 
         public ICommand ToggleMenuCommand { get; set; }
