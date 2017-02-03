@@ -30,9 +30,9 @@
         </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Rectangle Width="{Binding Transform.Width}" Height="{Binding Transform.Height}" Fill="Blue" RenderTransformOrigin="0.5,0.5">
+                    <Rectangle Width="{Binding Transform.Width}" Height="{Binding Transform.Height}" Fill="{Binding Color}" RenderTransformOrigin="0.5,0.5">
                         <Rectangle.RenderTransform>
-                            <RotateTransform Angle="{Binding Transform.Angle}"></RotateTransform>
+                            <RotateTransform Angle="{Binding Transform.Angle}" CenterX="{Binding Transform.Origin.X}" CenterY="{Binding Transform.Origin.Y}"></RotateTransform>
                         </Rectangle.RenderTransform>
                     </Rectangle>
                 </DataTemplate>

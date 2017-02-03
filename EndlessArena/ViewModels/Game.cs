@@ -31,7 +31,17 @@ namespace EndlessArena.ViewModels
         {
             foreach(var o in parent.Children)
             {
-                var no = new GameObject { Transform = new Transform { Angle = parent.Transform.Angle + o.Transform.Angle, Height = parent.Transform.Height + o.Transform.Height, Position = parent.Transform.Position + o.Transform.Position, Width = parent.Transform.Width + o.Transform.Width } };
+                var no = new GameObject {
+                    Transform = new Transform {
+                        Angle = parent.Transform.Angle + o.Transform.Angle,
+                        Height = o.Transform.Height,
+                        Position = parent.Transform.Position + o.Transform.Position,
+                        Width = o.Transform.Width,
+                        Origin = o.Transform.Origin
+                        
+                    },
+                    Color = o.Color
+                };
                 os.Add(no);
                 GetChildren(os, no);
             }
@@ -75,12 +85,15 @@ namespace EndlessArena.ViewModels
 
         public void Update()
         {
-            foreach (GameObject o in Objects)
+            if (!ShowMenu)
             {
-                o.Update();
-            }
+                foreach (GameObject o in Objects)
+                {
+                    o.Update();
+                }
 
-            OnPropertyChanged("Objects");
+                OnPropertyChanged("Objects");
+            }
         }
     }
 }

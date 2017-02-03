@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using EndlessArena.Utilities;
+using System.Windows.Media;
 
 namespace EndlessArena.Models
 {
@@ -19,6 +20,7 @@ namespace EndlessArena.Models
             Transform.Width = 50;
             Transform.Height = 50;
             Children.Add(weapon);
+            Color = Brushes.Blue;
         }
 
         public override void Update()

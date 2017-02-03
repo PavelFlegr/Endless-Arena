@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using EndlessArena.Utilities;
 
 namespace EndlessArena.Models
 {
@@ -10,8 +12,11 @@ namespace EndlessArena.Models
     {
         public Cannon()
         {
-            Transform.Width = 75;
+            Transform.Width = 25;
             Transform.Height = 25;
+            Color = Brushes.Black;
+            Transform.Position = new Vec2(25 + 12.5, 0);
+            Transform.Origin = -Transform.Position;
         }
     }
 }

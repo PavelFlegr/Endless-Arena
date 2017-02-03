@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EndlessArena.Utilities;
+using System.Windows.Media;
 
 namespace EndlessArena.Models
 {
@@ -16,6 +17,7 @@ namespace EndlessArena.Models
             Transform.Width = 10;
             Transform.Height = 10;
             Movement = Move(velocity).GetEnumerator();
+            Color = Brushes.Red;
         }
 
         public override void Update()
