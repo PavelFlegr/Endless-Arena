@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26020.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndlessArena", "EndlessArena\EndlessArena.csproj", "{4C8853A2-1F3D-49DD-902E-B427198D2CCB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Box2DX", "..\WpfApp1\Box2D\Box2DX.csproj", "{C157BCA5-BAC7-455F-A7DE-59D506D46ECF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4C8853A2-1F3D-49DD-902E-B427198D2CCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C8853A2-1F3D-49DD-902E-B427198D2CCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C8853A2-1F3D-49DD-902E-B427198D2CCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C157BCA5-BAC7-455F-A7DE-59D506D46ECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C157BCA5-BAC7-455F-A7DE-59D506D46ECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C157BCA5-BAC7-455F-A7DE-59D506D46ECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C157BCA5-BAC7-455F-A7DE-59D506D46ECF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

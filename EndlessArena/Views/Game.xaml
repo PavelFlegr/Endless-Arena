@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="/Resources/MainMenu.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <local:ScaleConverter x:Key="ScaleConverter"></local:ScaleConverter>
         </ResourceDictionary>
     </UserControl.Resources>
     <local:CartesianCanvas>
@@ -24,13 +25,13 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemContainerStyle>
             <Style>
-                <Setter Property="local:CartesianCanvas.X" Value="{Binding Transform.Position.X}"></Setter>
-                <Setter Property="local:CartesianCanvas.Y" Value="{Binding Transform.Position.Y}"></Setter>
+                <Setter Property="local:CartesianCanvas.X" Value="{Binding Transform.Position.X, Converter={StaticResource ScaleConverter}}"></Setter>
+                <Setter Property="local:CartesianCanvas.Y" Value="{Binding Transform.Position.Y, Converter={StaticResource ScaleConverter}}"></Setter>
             </Style>
         </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Rectangle Width="{Binding Transform.Width}" Height="{Binding Transform.Height}" Fill="{Binding Color}" RenderTransformOrigin="0.5,0.5">
+                    <Rectangle Width="{Binding Size.X, Converter={StaticResource ScaleConverter}}" Height="{Binding Size.Y, Converter={StaticResource ScaleConverter}}" Fill="{Binding Color}" RenderTransformOrigin="0.5,0.5">
                         <Rectangle.RenderTransform>
                             <RotateTransform Angle="{Binding Transform.Angle}" CenterX="{Binding Transform.Origin.X}" CenterY="{Binding Transform.Origin.Y}"></RotateTransform>
                         </Rectangle.RenderTransform>

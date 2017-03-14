@@ -8,62 +8,54 @@ using System.ComponentModel;
 using EndlessArena.Utilities;
 using EndlessArena.Utilities.Messages;
 using EndlessArena.Models;
+using System.Windows.Data;
+using System.Windows.Media;
+using System.Runtime.CompilerServices;
 
 namespace EndlessArena.ViewModels
 {
     class Game : IViewModel, INotifyPropertyChanged
     {
+        object l = new object();
         public IEnumerable<GameObject> Objects
         {
             get
             {
-                List<GameObject> os = new List<GameObject>();
-                foreach (var o in Scene.Current.Objects)
+                foreach (var o in Scene.Objects)
                 {
-                    os.Add(o);
-                    GetChildren(os, o);
+                    yield return o;
+                    foreach (var c in GetChildren(o)) yield return c;
                 }
-                return os;
             }
         }
 
-        void GetChildren(List<GameObject> os, GameObject parent)
+        IEnumerable<GameObject> GetChildren(GameObject parent)
         {
             foreach(var o in parent.Children)
             {
-                var no = new GameObject {
-                    Transform = new Transform {
-                        Angle = parent.Transform.Angle + o.Transform.Angle,
-                        Height = o.Transform.Height,
-                        Position = parent.Transform.Position + o.Transform.Position,
-                        Width = o.Transform.Width,
-                        Origin = o.Transform.Origin
-                        
-                    },
-                    Color = o.Color
-                };
-                os.Add(no);
-                GetChildren(os, no);
+                yield return o;
+                foreach (var c in GetChildren(o)) yield return c;
             }
         }
 
         public ICommand ToggleMenuCommand { get; set; }
         public ICommand MainMenuCommand { get; set; }
-        bool _showMenu;
+
         public bool ShowMenu
         {
-            get { return _showMenu; }
-            set
-            {
-                _showMenu = value;
-                OnPropertyChanged("ShowMenu");
-            }
+            get;set;
         }
 
         public Game()
         {
             ToggleMenuCommand = new RelayCommand(o => ShowMenu = !ShowMenu, o => true);
             MainMenuCommand = new RelayCommand(o => Messenger.Publish(new MainMenuMessage()), o => true);
+            Player ob = new Player();
+            new Wall(new Vec2(2, 24.6), new Vec2(-18.2, 0));
+            new Wall(new Vec2(2, 24.6), new Vec2(18.2, 0));
+            new Wall(new Vec2(34.4, 2), new Vec2(0, -9.8));
+            new Wall(new Vec2(34.4, 2), new Vec2(0, 9.8));
+            ob.Color = Brushes.Blue;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -78,21 +70,25 @@ namespace EndlessArena.ViewModels
             }
         }
 
-        void OnPropertyChanged(string propertyName)
+        void OnPropertyChanged(string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void Update()
         {
-            if (!ShowMenu)
+            lock (l)
             {
-                foreach (GameObject o in Objects)
+                if (!ShowMenu)
                 {
-                    o.Update();
+                    foreach (GameObject o in Objects.ToArray())
+                    {
+                        o.Update();
+                    }
+                    Scene.Update();
+                    //CollectionViewSource.GetDefaultView(Objects).Refresh();
+                    OnPropertyChanged(nameof(Objects));
                 }
-
-                OnPropertyChanged("Objects");
             }
         }
     }

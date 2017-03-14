@@ -9,10 +9,9 @@ namespace EndlessArena.Models
 {
     class Transform
     {
-        public Vec2 Position { get; set; }
-        public double Angle { get; set; }
-        public double Width { get; set; }
-        public double Height { get; set; }
-        public Vec2 Origin { get; set; }
+        public virtual Vec2 Position { get; set; }
+        public virtual double Angle { get; set; }
+        public virtual Vec2 Origin { get; set; }
+        public virtual Vec2 Size { get; set; }
     }
 }

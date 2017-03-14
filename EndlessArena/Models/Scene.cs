@@ -4,38 +4,56 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Box2DX.Common;
+using Box2DX.Dynamics;
+using Box2DX.Collision;
 
 namespace EndlessArena.Models
 {
-    class Scene
+    class Scene : ContactListener
     {
-        public static Scene Current { get; set; }
+        static World world = new World(new AABB { LowerBound = new Vec2(-500, -500), UpperBound = new Vec2(500, 500) }, new Vec2(0, 0), false);
+        public static HashSet<GameObject> Objects { get; } = new HashSet<GameObject>();
+        static List<GameObject[]> collisions = new List<GameObject[]>();
 
         static Scene()
         {
-            Current = new Scene();
-            Add(new Player());
+            world.SetContactListener(new Scene());
         }
-        public HashSet<GameObject> Objects { get; } = new HashSet<GameObject>();
+
+        public override void Add(ContactPoint point)
+        {
+            base.Add(point);
+            if (point.Separation < 0)
+            {
+                collisions.Add(new GameObject[] { (GameObject)point.Shape1.GetBody().GetUserData(), (GameObject)point.Shape2.GetBody().GetUserData() });
+            }
+        }
 
         public static void Add(GameObject gameObject)
         {
-            Current.AddInternal(gameObject);
+            gameObject.Body = world.CreateBody(new BodyDef { MassData = new MassData { Mass = 1 }, UserData = gameObject });
+            Objects.Add(gameObject);
         }
 
         public static void Destroy(GameObject gameObject)
         {
-            Current.DestroyInternal(gameObject);
+            if (Objects.Contains(gameObject))
+            {
+                Objects.Remove(gameObject);
+                world.DestroyBody(gameObject.Body);
+            }
         }
 
-        void AddInternal(GameObject gameObject)
-        {
-            Objects.Add(gameObject);
-        }
-
-        void DestroyInternal(GameObject gameObject)
-        {
-            Objects.Remove(gameObject);
+        public static void Update()
+        {       
+            world.Step(1, 1, 1);
+            foreach(var collision in collisions)
+            {
+                collision[0].OnCollision(collision[1]);
+                collision[1].OnCollision(collision[0]);
+            }
+            collisions.Clear();
         }
     }
 }
