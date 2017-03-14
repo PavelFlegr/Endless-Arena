@@ -30,7 +30,7 @@ namespace EndlessArena.Models
 
         public override void OnCollision(GameObject gameObject)
         {
-            Scene.Destroy(this);
+            Scene.Current.Destroy(this);
         }
     }
 }

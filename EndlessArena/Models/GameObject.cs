@@ -21,7 +21,7 @@ namespace EndlessArena.Models
 
         public GameObject()
         {
-            Scene.Add(this);
+            Scene.Current.Add(this);
         }
 
         public Body Body

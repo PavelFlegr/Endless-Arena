@@ -12,13 +12,14 @@ namespace EndlessArena.Models
 {
     class Scene : ContactListener
     {
-        static World world = new World(new AABB { LowerBound = new Vec2(-500, -500), UpperBound = new Vec2(500, 500) }, new Vec2(0, 0), false);
-        public static HashSet<GameObject> Objects { get; } = new HashSet<GameObject>();
-        static List<GameObject[]> collisions = new List<GameObject[]>();
-
-        static Scene()
+        public static Scene Current { get; set; }
+        World world = new World(new AABB { LowerBound = new Vec2(-500, -500), UpperBound = new Vec2(500, 500) }, new Vec2(0, 0), false);
+        public HashSet<GameObject> Objects { get; } = new HashSet<GameObject>();
+        List<GameObject[]> collisions = new List<GameObject[]>();
+        
+        public Scene()
         {
-            world.SetContactListener(new Scene());
+            world.SetContactListener(this);
         }
 
         public override void Add(ContactPoint point)
@@ -30,13 +31,13 @@ namespace EndlessArena.Models
             }
         }
 
-        public static void Add(GameObject gameObject)
+        public void Add(GameObject gameObject)
         {
             gameObject.Body = world.CreateBody(new BodyDef { MassData = new MassData { Mass = 1 }, UserData = gameObject });
             Objects.Add(gameObject);
         }
 
-        public static void Destroy(GameObject gameObject)
+        public void Destroy(GameObject gameObject)
         {
             if (Objects.Contains(gameObject))
             {
@@ -45,7 +46,7 @@ namespace EndlessArena.Models
             }
         }
 
-        public static void Update()
+        public void Update()
         {       
             world.Step(1, 1, 1);
             foreach(var collision in collisions)

@@ -17,13 +17,15 @@ namespace EndlessArena.Models
         bool canShoot = true;
         Cannon weapon = new Cannon();
 
-        public Player()
+        public Player(Vec2 position)
         {
             Size = new Vec2(2, 2);
             //Children.Add(weapon);
             Color = Brushes.Blue;
+            Transform.Position = position;
             var p = new PolygonDef();
             p.SetAsBox(1f, 1f);
+           
             Body.SetBullet(true);
             Body.CreateShape(p);
         }
