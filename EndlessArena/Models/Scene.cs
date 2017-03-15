@@ -10,7 +10,7 @@ using Box2DX.Collision;
 
 namespace EndlessArena.Models
 {
-    class Scene : ContactListener
+    abstract class Scene : ContactListener
     {
         public static Scene Current { get; set; }
         World world = new World(new AABB { LowerBound = new Vec2(-500, -500), UpperBound = new Vec2(500, 500) }, new Vec2(0, 0), false);

@@ -50,10 +50,11 @@ namespace EndlessArena.ViewModels
 
         public Game()
         {
-            Scene.Current = new Scene();
+            Scene.Current = new EndlessArenaScene();
             ToggleMenuCommand = new RelayCommand(o => ShowMenu = !ShowMenu, o => true);
             MainMenuCommand = new RelayCommand(o => Messenger.Publish(new MainMenuMessage()), o => true);
             Player ob = new Player(new Vec2(-5, 0));
+            ((EndlessArenaScene)Scene.Current).Player = ob;
             new Wall(new Vec2(2, 24.6), new Vec2(-18.2, 0));
             new Wall(new Vec2(2, 24.6), new Vec2(18.2, 0));
             new Wall(new Vec2(34.4, 2), new Vec2(0, -9.8));

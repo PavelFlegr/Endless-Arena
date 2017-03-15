@@ -25,7 +25,6 @@ namespace EndlessArena.Models
             Transform.Position = position;
             var p = new PolygonDef();
             p.SetAsBox(1f, 1f);
-           
             Body.SetBullet(true);
             Body.CreateShape(p);
         }

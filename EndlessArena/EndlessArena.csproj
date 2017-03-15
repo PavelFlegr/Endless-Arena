@@ -71,6 +71,7 @@
     <Compile Include="Input\MouseDownEventHandler.cs" />
     <Compile Include="Models\Bullet.cs" />
     <Compile Include="Models\Cannon.cs" />
+    <Compile Include="Models\EndlessArenaScene.cs" />
     <Compile Include="Models\Enemy.cs" />
     <Compile Include="Models\FakeTransform.cs" />
     <Compile Include="Models\GameObject.cs" />
