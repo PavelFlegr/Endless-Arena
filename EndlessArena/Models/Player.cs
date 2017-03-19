@@ -15,12 +15,10 @@ namespace EndlessArena.Models
     class Player : Fighter
     {
         bool canShoot = true;
-        Cannon weapon = new Cannon();
 
         public Player(Vec2 position)
         {
             Size = new Vec2(2, 2);
-            //Children.Add(weapon);
             Color = Brushes.Blue;
             Transform.Position = position;
             var p = new PolygonDef();

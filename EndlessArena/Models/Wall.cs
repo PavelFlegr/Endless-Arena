@@ -17,7 +17,7 @@ namespace EndlessArena.Models
             Size = size;
             Color = Brushes.DarkGray;
             Transform.Position = position;
-            Body.SetMass(new Box2DX.Collision.MassData { Mass = 0 });
+            Body.SetMass(new MassData { Mass = 0 });
             var p = new PolygonDef();
             p.SetAsBox((float)size.X / 2, (float)size.Y / 2);
             Body.CreateShape(p);

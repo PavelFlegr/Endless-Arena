@@ -15,6 +15,7 @@ namespace EndlessArena.Models
                 return entity.Health;
             }
         }
+
         Fighter entity;
         public HealthBar(Fighter entity)
         {

@@ -19,7 +19,6 @@ namespace EndlessArena.Models
         {
             Size = new Vec2(2, 2);
             Transform.Position = position;
-            //Children.Add(weapon);
             Color = Brushes.Red;
             var p = new PolygonDef();
             p.SetAsBox(1f, 1f);
