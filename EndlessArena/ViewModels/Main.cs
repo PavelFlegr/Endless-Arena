@@ -13,6 +13,7 @@ namespace EndlessArena.ViewModels
 {
     class Main : IViewModel, INotifyPropertyChanged
     {
+        public static Main Instance;
         IViewModel _current;
         public IViewModel Current
         {
@@ -26,6 +27,7 @@ namespace EndlessArena.ViewModels
 
         public Main()
         {
+            Instance = this;
             Current = new MainMenu();
             Messenger.Subscribe<StartGameMessage>(a => Current = new Game());
             Messenger.Subscribe<KeyDownMessage>(a => OnKeyDown(a.Key));

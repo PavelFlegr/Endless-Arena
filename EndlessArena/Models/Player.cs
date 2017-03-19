@@ -12,7 +12,7 @@ using Box2DX.Dynamics;
 
 namespace EndlessArena.Models
 {
-    class Player : GameObject
+    class Player : Fighter
     {
         bool canShoot = true;
         Cannon weapon = new Cannon();
@@ -27,6 +27,7 @@ namespace EndlessArena.Models
             p.SetAsBox(1f, 1f);
             Body.SetBullet(true);
             Body.CreateShape(p);
+            new HealthBar(this);
         }
 
         public override void Update()

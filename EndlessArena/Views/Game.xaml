@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EndlessArena.Views"
+             xmlns:models="clr-namespace:EndlessArena.Models"
              xmlns:Converters="clr-namespace:EndlessArena.Converters"
              mc:Ignorable="d">
     <UserControl.Resources>
@@ -22,21 +23,24 @@
                 <local:CartesianCanvas/>
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
-        <ItemsControl.ItemContainerStyle>
-            <Style>
-                <Setter Property="local:CartesianCanvas.X" Value="{Binding Transform.Position.X, Converter={StaticResource ScaleConverter}}"></Setter>
-                <Setter Property="local:CartesianCanvas.Y" Value="{Binding Transform.Position.Y, Converter={StaticResource ScaleConverter}}"></Setter>
-            </Style>
-        </ItemsControl.ItemContainerStyle>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="local:CartesianCanvas.X" Value="{Binding Transform.Position.X, Converter={StaticResource ScaleConverter}}"></Setter>
+                    <Setter Property="local:CartesianCanvas.Y" Value="{Binding Transform.Position.Y, Converter={StaticResource ScaleConverter}}"></Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <ItemsControl.Resources>
+                <DataTemplate DataType="{x:Type models:HealthBar}">
+                    <ProgressBar Background="Transparent" Foreground="LightGreen" Value="{Binding Value, Mode=OneWay}" Width="{Binding Size.X, Converter={StaticResource ScaleConverter}}" Height="{Binding Size.Y, Converter={StaticResource ScaleConverter}}" RenderTransformOrigin="0.5,0.5"></ProgressBar>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type models:GameObject}">
                     <Rectangle Width="{Binding Size.X, Converter={StaticResource ScaleConverter}}" Height="{Binding Size.Y, Converter={StaticResource ScaleConverter}}" Fill="{Binding Color}" RenderTransformOrigin="0.5,0.5">
                         <Rectangle.RenderTransform>
                             <RotateTransform Angle="{Binding Transform.Angle}" CenterX="{Binding Transform.Origin.X}" CenterY="{Binding Transform.Origin.Y}"></RotateTransform>
                         </Rectangle.RenderTransform>
                     </Rectangle>
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
+            </ItemsControl.Resources>
         </ItemsControl>
         <DockPanel Visibility="{Binding ShowMenu, Converter={StaticResource BoolToVis}}">
             <StackPanel VerticalAlignment="Center" Style="{StaticResource Menu}">

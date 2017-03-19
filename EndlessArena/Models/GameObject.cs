@@ -11,8 +11,8 @@ using EndlessArena.Utilities;
 namespace EndlessArena.Models
 {
     class GameObject
-    {
-        public Transform Transform { get; private set; }// = new Transform();
+    { 
+        public Transform Transform { get; private set; } = new Transform();
         public HashSet<GameObject> Children { get; set; } = new HashSet<GameObject>();
         public Brush Color { get; set; }
         public Vec2 Size { get; set; }
@@ -24,13 +24,12 @@ namespace EndlessArena.Models
             Scene.Current.Add(this);
         }
 
+        //replaces transform with a facade forwarding to physical body when set
         public Body Body
         {
             get { return body; }
             set
             {
-                //Vec2 oldPos = Transform.Position;
-                //double oldAngle = Transform.Angle;
                 body = value;
                 Transform = new FakeTransform
                 {
@@ -39,8 +38,6 @@ namespace EndlessArena.Models
                     GetPosition = () => new Vec2(body.GetPosition().X, body.GetPosition().Y),
                     SetPosition = (p) => body.SetXForm(new Box2DX.Common.Vec2((float)p.X, (float)p.Y), body.GetAngle())
                 };
-                //Transform.Position = oldPos;
-                //Transform.Angle = oldAngle;
             }
         }
 

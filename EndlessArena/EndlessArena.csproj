@@ -74,7 +74,9 @@
     <Compile Include="Models\EndlessArenaScene.cs" />
     <Compile Include="Models\Enemy.cs" />
     <Compile Include="Models\FakeTransform.cs" />
+    <Compile Include="Models\Fighter.cs" />
     <Compile Include="Models\GameObject.cs" />
+    <Compile Include="Models\HealthBar.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Scene.cs" />
     <Compile Include="Models\Transform.cs" />
@@ -88,10 +90,14 @@
     <Compile Include="Utilities\Messenger.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="ViewModels\Game.cs" />
+    <Compile Include="ViewModels\GameOver.cs" />
     <Compile Include="ViewModels\MainMenu.cs" />
     <Compile Include="Views\CartesianCanvas.cs" />
     <Compile Include="Views\Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GameOver.xaml.cs">
+      <DependentUpon>GameOver.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
@@ -102,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Game.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GameOver.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

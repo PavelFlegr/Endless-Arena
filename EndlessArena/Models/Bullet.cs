@@ -30,6 +30,11 @@ namespace EndlessArena.Models
 
         public override void OnCollision(GameObject gameObject)
         {
+            if(gameObject is Fighter)
+            {
+                var fighter = (Fighter)gameObject;
+                fighter.Health -= 10;
+            }
             Scene.Current.Destroy(this);
         }
     }

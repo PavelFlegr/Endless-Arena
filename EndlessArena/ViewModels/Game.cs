@@ -54,12 +54,13 @@ namespace EndlessArena.ViewModels
             ToggleMenuCommand = new RelayCommand(o => ShowMenu = !ShowMenu, o => true);
             MainMenuCommand = new RelayCommand(o => Messenger.Publish(new MainMenuMessage()), o => true);
             Player ob = new Player(new Vec2(-5, 0));
+            ob.OnDeath += GameLost;
             ((EndlessArenaScene)Scene.Current).Player = ob;
             new Wall(new Vec2(2, 24.6), new Vec2(-18.2, 0));
             new Wall(new Vec2(2, 24.6), new Vec2(18.2, 0));
             new Wall(new Vec2(34.4, 2), new Vec2(0, -9.8));
             new Wall(new Vec2(34.4, 2), new Vec2(0, 9.8));
-            new Enemy(new Vec2(5, 0));
+            new Enemy(new Vec2(5, 0)).OnDeath += GameWon;
             ob.Color = Brushes.Blue;
             new Task(() =>
             {
@@ -69,6 +70,18 @@ namespace EndlessArena.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        void GameLost(object o, EventArgs e)
+        {
+            started = false;
+            Main.Instance.Current = new GameOver("You Lost");
+        }
+
+        void GameWon(object o, EventArgs e)
+        {
+            started = false;
+            Main.Instance.Current = new GameOver("You Won");
+        }
 
         public void OnKeyDown(Key key)
         {
@@ -87,6 +100,7 @@ namespace EndlessArena.ViewModels
 
         public void Update()
         {
+            //wpf doesn't seem to wait between frames so we have to
             lock (l)
             {
                 if (!ShowMenu && started)
@@ -96,7 +110,6 @@ namespace EndlessArena.ViewModels
                         o.Update();
                     }
                     Scene.Current.Update();
-                    //CollectionViewSource.GetDefaultView(Objects).Refresh();
                     OnPropertyChanged(nameof(Objects));
                 }
             }
