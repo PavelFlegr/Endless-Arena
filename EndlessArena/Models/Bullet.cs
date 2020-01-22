@@ -15,8 +15,10 @@ namespace EndlessArena.Models
     class Bullet : GameObject
     {
         Utilities.Vec2 velocity;
-        public Bullet(Utilities.Vec2 velocity, Utilities.Vec2 position)
+        Fighter sourceShooter;
+        public Bullet(Utilities.Vec2 velocity, Utilities.Vec2 position, Fighter sourceShooter)
         {
+            this.sourceShooter = sourceShooter;
             Transform.Position = position;
             this.velocity = velocity;
             Size = new Utilities.Vec2(0.3, 0.3);
@@ -32,10 +34,18 @@ namespace EndlessArena.Models
         {
             if(gameObject is Fighter)
             {
-                var fighter = (Fighter)gameObject;
-                fighter.Health -= 10;
+                if (gameObject != sourceShooter)
+                {
+                    var fighter = (Fighter)gameObject;
+                    fighter.Health -= 10;
+                    Scene.Current.Destroy(this);
+                }
             }
-            Scene.Current.Destroy(this);
+            else
+            {
+                Scene.Current.Destroy(this);
+            }
+            
         }
     }
 }

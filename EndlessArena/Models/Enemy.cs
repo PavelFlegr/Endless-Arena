@@ -29,7 +29,7 @@ namespace EndlessArena.Models
 
         public IEnumerator Move()
         {
-            float speed = 0.3f;
+            float speed = 0.1f;
             while (Transform.Position.Y > -7)
             {
                 Body.SetLinearVelocity(new Box2DX.Common.Vec2(0, -speed));
@@ -77,9 +77,9 @@ namespace EndlessArena.Models
         void Shoot()
         {
             //calculate direction
-            Vec2 DirVec = new Vec2(Math.Cos(Transform.Angle / 180 * Math.PI), Math.Sin(Transform.Angle / 180 * Math.PI));
+            Vec2 DirVec = new Vec2(Math.Cos(Transform.Angle / 180 * Math.PI)/5, Math.Sin(Transform.Angle / 180 * Math.PI)/5);
             //set velocity and position
-            GameObject proj = new Bullet(DirVec, new Vec2(Transform.Position.X + DirVec.X * Size.X, Transform.Position.Y + DirVec.Y * Size.Y));
+            GameObject proj = new Bullet(DirVec, new Vec2(Transform.Position.X + DirVec.X * Size.X, Transform.Position.Y + DirVec.Y * Size.Y), this);
             //block shooting for 500ms
             canShoot = false;
             Task.Delay(500).ContinueWith(x => canShoot = true);

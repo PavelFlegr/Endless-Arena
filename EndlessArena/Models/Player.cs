@@ -31,7 +31,7 @@ namespace EndlessArena.Models
         public override void Update()
         {
             Vec2 velocity = new Vec2();
-            double speed = 0.3;
+            double speed = 0.1;
             if (Keyboard.IsKeyDown(Key.D))
             {
                 velocity += new Vec2(speed, 0);
@@ -74,9 +74,9 @@ namespace EndlessArena.Models
         void Shoot()
         {
             //calculate direction
-            Vec2 DirVec = new Vec2(Math.Cos(Transform.Angle / 180 * Math.PI), Math.Sin(Transform.Angle / 180 * Math.PI));
+            Vec2 DirVec = new Vec2(Math.Cos(Transform.Angle / 180 * Math.PI)/5, Math.Sin(Transform.Angle / 180 * Math.PI)/5);
             //set velocity and position
-            GameObject proj = new Bullet(DirVec, new Vec2(Transform.Position.X + DirVec.X * Size.X, Transform.Position.Y + DirVec.Y * Size.Y));
+            GameObject proj = new Bullet(DirVec, new Vec2(Transform.Position.X + DirVec.X * Size.X, Transform.Position.Y + DirVec.Y * Size.Y), this);
             //block shooting for 500ms
             canShoot = false;
             Task.Delay(500).ContinueWith(x => canShoot = true);
